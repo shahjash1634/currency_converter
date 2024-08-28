@@ -1,0 +1,47 @@
+<html>
+	<head>
+	<title> Currency Converter</title>
+	<style>
+	*{
+		font-size: 40px; font-family: Cambria;}
+	body{background-color: crimson;}
+	h2{ width:70%; border: solid; border-radius:40px;}
+	</style>
+	
+	</head>
+
+	<body>
+	<center>
+		<h1> Currency Converter</h1>
+		<form onsubmit="cc()">
+			<input type = "number" step="any" id="doll" placeholder="Enter in dollars">
+			<input type="submit" value="Convert">
+		</form>
+		<h2 id="rs">
+
+		<script>
+		function cc()
+		{
+			event.preventDefault();
+			let rs=document.getElementById("rs");
+
+			let url = "https://api.exchangerate-api.com/v4/latest/USD"
+			fetch(url)
+
+			.then(res=> res.json())
+			.then(data=> {
+				let DOLLAR = data.rates.INR;
+				let aid= (doll.value);
+				let air = aid*DOLLAR;
+				let result = "₹"+air.toFixed(2);
+				rs.innerHTML = result;
+				
+			})
+			.catch(err=>rs.innerHTML="issue" + err);
+		}
+
+		
+		</script>
+	</center>
+	</body>
+</html>
